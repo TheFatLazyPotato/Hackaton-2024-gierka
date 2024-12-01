@@ -1,0 +1,4 @@
+repository "Hackaton 2024 giereczka@TheFatLazyPotato@cloud"
+  path "/"
+    br "/main"
+    co "/main"
