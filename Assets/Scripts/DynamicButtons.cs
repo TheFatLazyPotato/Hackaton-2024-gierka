@@ -15,6 +15,9 @@ public class DynamicButtonsWithSceneChange : MonoBehaviour
     public int referenceStolen = 0;
     public int papersValue = 1000;
 
+    AudioManager audioManager;
+
+
     private void Start()
     {
         GlobalVariables.money += 5 + GlobalVariables.docsStollen * papersValue;
@@ -31,6 +34,7 @@ public class DynamicButtonsWithSceneChange : MonoBehaviour
             titles5[1] = "WEZWANIE";
         }
     }
+
     private void OnGUI()
     {
         if(GlobalVariables.day == 0)
