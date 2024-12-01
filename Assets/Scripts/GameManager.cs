@@ -7,6 +7,7 @@ using System;
 public class GameManager : MonoBehaviour
 {
     public int printersDoneThatDay;
+    private GUIStyle currentStyle = null;
     public int rageMeter = 0; 
     public int rageMax = 20000;
     public int atDesk;
@@ -21,9 +22,11 @@ public class GameManager : MonoBehaviour
     public bool[] desksAvailable = new bool[13];
     public bool[] desksRagging = new bool[13];
 
+    public bool kawaT = false;
+
     public GameObject prefab; // The prefab to summon
     public Transform spawnPoint; // The point where the prefab will spawn
-
+    public PlayerMovement pleyer;
     void Start()
     {
         stopTime = false;
@@ -36,6 +39,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if(rageMeter>rageMax)
+        {
+            SceneManager.LoadScene(7);
+        }
         if(!stopTime)
         {
             gameTime += Time.deltaTime;
@@ -47,9 +54,10 @@ public class GameManager : MonoBehaviour
                 if(printersDoneThatDay == 5)
                 {
                     printersDoneThatDay = 0;
-                    SceneManager.LoadScene(0);
+                    SceneManager.LoadScene(2);
+                    GlobalVariables.playerSpeed = 5;
                 }
-                if(gameTime % 10 > 0 && gameTime % 10 < epsilon && minionCooldown == 0)
+                if(gameTime % 20 > 0 && gameTime % 20 < epsilon && minionCooldown == 0)
                 {
                     int i = 0;
                     do{
@@ -63,12 +71,13 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case 2:
-                if(printersDoneThatDay == 5)
+                if(printersDoneThatDay == 7)
                 {
                     printersDoneThatDay = 0;
-                    SceneManager.LoadScene(0);
+                    SceneManager.LoadScene(2);
+                    GlobalVariables.playerSpeed = 6;
                 }
-                if(gameTime-1 % 10 > 0 && gameTime-1 % 10 < epsilon && minionCooldown == 0)
+                if(gameTime % 20 > 0 && gameTime % 20 < epsilon && minionCooldown == 0)
                 {
                     int i = 0;
                     do{
@@ -82,12 +91,13 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case 3:
-                if(printersDoneThatDay == 5)
+                if(printersDoneThatDay == 7)
                 {
                     printersDoneThatDay = 0;
-                    SceneManager.LoadScene(0);
+                    SceneManager.LoadScene(2);
+                    GlobalVariables.playerSpeed = 6;
                 }
-                if(gameTime % 10 > 0 && gameTime % 10 < epsilon && minionCooldown == 0)
+                if(gameTime % 15 > 0 && gameTime % 15 < epsilon && minionCooldown == 0)
                 {
                     int i = 0;
                     do{
@@ -101,12 +111,13 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case 4:
-                if(printersDoneThatDay == 5)
+                if(printersDoneThatDay == 10)
                 {
                     printersDoneThatDay = 0;
-                    SceneManager.LoadScene(0);
+                    SceneManager.LoadScene(2);
+                    GlobalVariables.playerSpeed = 6;
                 }
-                if(gameTime % 10 > 0 && gameTime % 10 < epsilon && minionCooldown == 0)
+                if(gameTime % 12 > 0 && gameTime % 12 < epsilon && minionCooldown == 0)
                 {
                     int i = 0;
                     do{
@@ -120,12 +131,13 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case 5:
-                if(printersDoneThatDay == 5)
+                if(printersDoneThatDay == 10)
                 {
                     printersDoneThatDay = 0;
-                    SceneManager.LoadScene(0);
+                    SceneManager.LoadScene(2);
+                    GlobalVariables.playerSpeed = 6;
                 }
-                if(gameTime % 10 > 0 && gameTime % 10 < epsilon && minionCooldown == 0)
+                if(gameTime % 8 > 0 && gameTime % 8 < epsilon && minionCooldown == 0)
                 {
                     int i = 0;
                     do{
@@ -144,6 +156,13 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if(kawaT && !GlobalVariables.drankCoffee)
+            {   
+                Debug.Log("Prosze dzialaj");
+                GlobalVariables.drankCoffee = true;
+                GlobalVariables.playerSpeed = 10;
+            }
+
             switch(atDesk)
             {
                 case 1:
@@ -279,6 +298,10 @@ public class GameManager : MonoBehaviour
             rageMeter--;
             rageMeter--;
         }
+        //if (Input.GetKeyDown(KeyCode.Space) && kawaT)
+        //{
+            //pleyer.moveSpeed = pleyer.moveSpeed * 2;
+        //}
     }
     public int Rnd12()
     {
@@ -317,5 +340,6 @@ public class GameManager : MonoBehaviour
         GUI.Box(new Rect(30, 10, 600 * (float)rageMeter/(float)rageMax, 25), "");
         GUI.Label(new Rect(30, 630, 100, 40),"Rage Bar");
     }
+
 }
 

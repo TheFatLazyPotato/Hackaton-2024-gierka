@@ -14,7 +14,8 @@ public class ToRepair
     {
         if (activeTask)
             return;
-        signal.SetActive(true);
+        if (signal != null)
+            signal.SetActive(true);
         activeTask = true;
         //hha.GetComponent<SkinnedMeshRenderer>().
     }
@@ -23,7 +24,8 @@ public class ToRepair
     {
         if (!activeTask)
             return;
-        signal.SetActive(false);
+        if (signal != null)
+            signal.SetActive(false);
         activeTask = false;
     }
 

@@ -102,8 +102,6 @@ public class HitboxHitAction : MonoBehaviour
         if (rootBone != null)
         {
             gameObject.GetComponent<MeshCollider>().transform.SetPositionAndRotation(rootBone.transform.position - deltaPos, rootBone.transform.rotation * deltaRot);
-            Vector3 ax = Quaternion.Angle(rootBone.transform.rotation, Vector3.Up);
-            gameObject.GetComponent<MeshCollider>().transform.Translate(rootBone.transform.rotation.)
         }
     }
 

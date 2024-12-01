@@ -34,7 +34,7 @@ public class ShelfTrigger : MonoBehaviour
             if (progress >= 100)
             {
                 isComplete = true;
-                docChance = Rnd100() - timesSearched*3;
+                docChance = Rnd100() - timesSearched*2;
                 timesSearched++;
                 if(docChance >= 90)
                 {
@@ -42,12 +42,14 @@ public class ShelfTrigger : MonoBehaviour
                     GlobalVariables.docsStollen++;
                     message = "Znaleziono sporo dokumentów";
                     messageTime = 1000;
+                    GlobalVariables.hasStolen = true;
                 }
                 else if(docChance <= 90 && docChance > 60)
                 {
                     GlobalVariables.docsStollen++;
                     message = "Znaleziono dokumenty";
                     messageTime = 1000;
+                    GlobalVariables.hasStolen = true;
                 }
                 else
                 {

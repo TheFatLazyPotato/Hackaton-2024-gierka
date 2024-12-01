@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Speed of movement
+    public float moveSpeed = GlobalVariables.playerSpeed; // Speed of movement
 
 
     public float rotationSpeed = 10f; 
@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        GlobalVariables.playerSpeed = 5;
         // Get the Rigidbody component
         rb = GetComponent<Rigidbody>();
 
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        float moveSpeed = GlobalVariables.playerSpeed;
         // Get input from WASD or arrow keys
         float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right
         float moveZ = Input.GetAxis("Vertical");   // W/S or Up/Down
@@ -32,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Move the Rigidbody based on input
-        rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveInput * GlobalVariables.playerSpeed * Time.fixedDeltaTime);
 
         if (moveInput != Vector3.zero)
         {
